@@ -3,6 +3,7 @@ import 'package:cheatsheetbeer/BiereRepository.dart';
 import 'package:flutter/material.dart';
 
 import 'biere.dart';
+import 'detail.dart';
 
 void main() => runApp(MyApp());
 
@@ -57,35 +58,51 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _celluleDeBiere(BuildContext context, int position) {
     var biere = _bieres[position];
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                EcranDetail(biere),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 60),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: biere.image,
-                  height: 130,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(biere.nom, style: TextStyle(color: Colors.white, fontSize: 18),),
-                ),
-                Text(biere.pays + " | " + biere.prix, style: TextStyle(color: Colors.white.withOpacity(0.5)),)
-              ],
+            Center(
+              child: Column(
+                children: <Widget>[
+                  CachedNetworkImage(
+                    imageUrl: biere.image,
+                    height: 130,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      biere.nom,
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                  Text(
+                    biere.pays + " | " + biere.prix,
+                    style: TextStyle(color: Colors.white.withOpacity(0.5)),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
