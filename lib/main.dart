@@ -73,19 +73,25 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top: 60),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+              child: Hero(
+                tag: biere.nom + "fond",
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                 ),
               ),
             ),
             Center(
               child: Column(
                 children: <Widget>[
-                  CachedNetworkImage(
-                    imageUrl: biere.image,
-                    height: 130,
+                  Hero(
+                    tag: biere.nom + "image",
+                    child: CachedNetworkImage(
+                      imageUrl: biere.image,
+                      height: 130,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

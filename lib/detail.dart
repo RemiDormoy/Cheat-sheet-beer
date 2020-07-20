@@ -20,9 +20,12 @@ class EcranDetail extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: (MediaQuery.of(context).size.height * 0.4) + 20,
-                child: CachedNetworkImage(
-                  imageUrl: biere.image,
-                  fit: BoxFit.fitHeight,
+                child: Hero(
+                  tag: biere.nom + "image",
+                  child: CachedNetworkImage(
+                    imageUrl: biere.image,
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
             ),
@@ -37,40 +40,48 @@ class EcranDetail extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.6 + 20,
-                  decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40))),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          biere.nom,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 20),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Text(
-                            biere.pays + "  |  " + biere.prix + "  |  " + biere.type,
-                            style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16),
+                  child: Stack(
+                    children: <Widget>[
+                      Hero(
+                        tag: biere.nom + "fond",
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blueAccent,
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 24),
-                          child: Text(
-                            biere.description,
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              biere.nom,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                biere.pays + "  |  " + biere.prix + "  |  " + biere.type,
+                                style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 24),
+                              child: Text(
+                                biere.description,
+                                style: TextStyle(color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
